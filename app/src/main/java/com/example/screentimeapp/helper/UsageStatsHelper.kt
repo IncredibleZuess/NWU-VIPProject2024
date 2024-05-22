@@ -7,6 +7,7 @@ import android.app.usage.UsageEvents.Event.MOVE_TO_FOREGROUND
 import android.app.usage.UsageStatsManager
 import android.content.Context
 import com.example.screentimeapp.model.UsageRecord
+import java.io.File
 import java.lang.ref.WeakReference
 
 object UsageStatsHelper {

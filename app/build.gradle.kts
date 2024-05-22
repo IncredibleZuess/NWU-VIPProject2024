@@ -51,6 +51,8 @@ android {
 }
 
 dependencies {
+    // https://mvnrepository.com/artifact/net.sourceforge.javacsv/javacsv
+    implementation("net.sourceforge.javacsv:javacsv:2.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
