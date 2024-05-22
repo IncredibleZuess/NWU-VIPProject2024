@@ -6,7 +6,10 @@ import android.app.usage.UsageEvents.Event.ACTIVITY_RESUMED
 import android.app.usage.UsageEvents.Event.MOVE_TO_FOREGROUND
 import android.app.usage.UsageStatsManager
 import android.content.Context
+import com.csvreader.CsvReader
+import com.example.screentimeapp.model.UsageDigest
 import com.example.screentimeapp.model.UsageRecord
+import org.json.JSONObject
 import java.io.File
 import java.lang.ref.WeakReference
 
@@ -53,6 +56,65 @@ object UsageStatsHelper {
         Logger.d("recordUsage", "$packageName from ${CalendarHelper.getDate(startTime)} - ${duration/1000}s")
         val filename = CalendarHelper.getDateCon(startTime)
         val path = File(context.filesDir.path+ "/" + filename)
-
+        CsvHelper.write(path, listOf(UsageRecord(packageName,startTime,duration)))
     }
+    fun queryIntervalUsage(duration: Long): ArrayList<UsageRecord> {
+        val context = context?.get() ?: return arrayListOf()
+        val currentTime = System.currentTimeMillis()
+        val startTime = currentTime - duration
+        val records = arrayListOf<UsageRecord>()
+
+        for (i in startTime..currentTime step HOUR_24) {
+            val filename = CalendarHelper.getDateCon(i)
+            val file = File(context.filesDir.path + "/" + filename)
+            records.addAll(CsvHelper.read(file))
+        }
+        return records
+    }
+
+    private fun filter(records: List<UsageRecord>): List<UsageRecord> {
+        val list = store().view.state.notTrackingList
+        return records.filter { !list.contains(it.packageName) }
+    }
+
+    fun getTodayUsageTime(filter: Boolean = false): Long {
+        val records = if (filter) filter(queryTodayUsage()) else queryTodayUsage()
+        return records.map { it.duration }.sum()
+    }
+
+    fun queryUsage(day: String): List<UsageRecord> {
+        val context = context?.get() ?: return listOf()
+        val file = File(context.filesDir.path + "/" + day)
+        return CsvHelper.read(file)
+    }
+
+    fun queryTodayUsage(): List<UsageRecord> {
+        return queryUsage(CalendarHelper.getDateCon(System.currentTimeMillis()))
+    }
+
+    fun query24hUsage(): List<UsageRecord> {
+        return queryIntervalUsage(HOUR_24).filter { it.starTime >= System.currentTimeMillis() - HOUR_24 }
+    }
+
+    fun getAverageUsageTime(filter: Boolean = false): Long {
+        val context = context?.get() ?: return 0
+        val ntList = store().view.state.notTrackingList
+        val pref = context.getSharedPreferences(UsageDigest.TAG, Context.MODE_PRIVATE)
+        val all = if (filter) pref.all.filter { !ntList.contains(it.key) } else pref.all
+        var sum = 0L
+        var count = 0
+        for ((_, value) in all) {
+            val t = UsageDigest.fromJson(JSONObject(value as? String)).totalTime
+            if (t != 0L) {
+                sum += t
+                count += 1
+            }
+        }
+        if (count == 0 || all.isEmpty()) {
+            return 0L
+        } else {
+            return (sum / count)
+        }
+    }
+}
 }
