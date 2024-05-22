@@ -1,3 +1,9 @@
+/**
+ * @author Carlo Barnardo
+ * @editor Sebastian Klopper
+ *
+ * Contains all the helper functions for the CSV files
+ */
 package com.example.screentimeapp.helper
 
 import com.csvreader.CsvReader
@@ -7,8 +13,15 @@ import java.io.File
 import java.io.FileWriter
 
 object CsvHelper {
+    /**
+     * The header of the CSV file
+     */
     val usageHeader = arrayOf("packageName", "startTime", "duration")
 
+
+    /**
+     * Writes the records to the file
+     */
     fun write(file: File, records: List<UsageRecord>): Boolean {
         val alreadyExist = File(file.path).exists()
         return try {
@@ -22,15 +35,18 @@ object CsvHelper {
             writer.close()
             true
         } catch (e: Exception) {
-            Logger.e("CsvHelper", e.message + ": " + e.localizedMessage)
+            Logger.error("CsvHelper", e.message + ": " + e.localizedMessage)
             false
         }
     }
 
+    /**
+     * Reads the records from the file
+     */
     fun read(file: File): List<UsageRecord> {
         try {
             if (!file.canRead()) {
-                Logger.d("CsvHelper", "can't read file ${file.path}")
+                Logger.debug("CsvHelper", "can't read file ${file.path}")
                 return listOf()
             }
             val records = arrayListOf<UsageRecord>()
@@ -43,7 +59,7 @@ object CsvHelper {
             reader.close()
             return records
         } catch (e: Exception) {
-            Logger.e("CsvHelper", e.message + ": " + e.localizedMessage)
+            Logger.error("CsvHelper", e.message + ": " + e.localizedMessage)
             return listOf()
         }
     }

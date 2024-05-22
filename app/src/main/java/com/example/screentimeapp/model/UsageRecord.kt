@@ -1,3 +1,10 @@
+/**
+ * @author Carlo Barnardo
+ * @editor Sebastian Klopper
+ *
+ * Defines the Usage records for the program and the helper functions to convert between JSON and Arrays
+ */
+
 package com.example.screentimeapp.model
 
 import com.example.screentimeapp.helper.CalendarHelper

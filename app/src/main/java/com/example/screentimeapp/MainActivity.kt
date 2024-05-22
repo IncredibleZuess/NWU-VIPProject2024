@@ -1,3 +1,10 @@
+/**
+ * @author Carlo Barnardo
+ * @editor Sebastian Klopper
+ *
+ * The Code behind the Main application and the required functions
+ */
+
 package com.example.screentimeapp
 
 import android.os.Bundle
@@ -12,6 +19,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.screentimeapp.ui.theme.ScreenTimeAppTheme
 
+
+/**
+ * Calls all the required on create functions for the start up of the app
+ */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +40,10 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+
+/**
+ * Edits the text field to greet the user
+ */
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
@@ -37,6 +52,9 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     )
 }
 
+/**
+ * The preview for the greeting
+ */
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {

@@ -1,3 +1,10 @@
+/**
+ * @author Carlo Barnardo
+ * @editor Sebastian Klopper
+ *
+ * Sets the styling for the application
+ */
+
 package com.example.screentimeapp.ui.theme
 
 import android.app.Activity
@@ -15,12 +22,18 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
+/**
+ * Defines the Dark color scheme
+ */
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
     secondary = PurpleGrey80,
     tertiary = Pink80
 )
 
+/**
+ * Defines the Light color scheme
+ */
 private val LightColorScheme = lightColorScheme(
     primary = Purple40,
     secondary = PurpleGrey40,
@@ -37,6 +50,9 @@ private val LightColorScheme = lightColorScheme(
     */
 )
 
+/**
+ * Sets the themes for the app
+ */
 @Composable
 fun ScreenTimeAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
