@@ -1,3 +1,8 @@
+/**
+ * @author Carlo Barnardo
+ * @editor Sebastian Klopper
+ *
+ */
 package com.example.vip_project_1
 
 import android.app.usage.UsageStats
@@ -25,9 +30,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class HomeActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
 
-
-
-
+    /**
+     * Called when the activity is first created.
+     */
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +56,10 @@ class HomeActivity : AppCompatActivity() {
             true
         }
     }
+
+    /**
+     * Replaces the current fragment with the given one.
+     */
     private fun replaceFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()

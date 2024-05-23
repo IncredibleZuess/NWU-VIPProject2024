@@ -28,11 +28,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
 
     /**
-     * Checks if the user has granted the app permission to access their usage stats.
-     */
-
-
-    /**
      * Queries the usage stats of the user and displays them in a RecyclerView.
      */
     private fun trackUsage() {
@@ -45,11 +40,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-    /**
-     * Sets up the RecyclerView with the user's usage stats.
-     */
-
 
 
     /**

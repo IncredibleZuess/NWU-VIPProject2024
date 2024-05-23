@@ -46,6 +46,9 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    /**
+     * Inflates the layout for this fragment
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
