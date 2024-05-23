@@ -5,11 +5,21 @@
 
 package com.example.vip_project_1
 
+import android.app.usage.UsageStats
+import android.app.usage.UsageStatsManager
+import android.content.Context
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,6 +35,8 @@ class HomeFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var recyclerView: RecyclerView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,13 +45,44 @@ class HomeFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
     }
+    private fun displayUsageStats() {
+        val usageStatsManager = activity?.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
+        val currentTime = System.currentTimeMillis()
+        val stats = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, currentTime- 1000*60*60*24, currentTime)
+        if (stats != null) {
+            val sortedStats = stats.sortedByDescending { it.totalTimeInForeground }
+            setupRecyclerView(sortedStats)
+        }
+    }
+    private fun setupRecyclerView(usageStats: List<UsageStats>) {
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        recyclerView.adapter = UsageStatsAdapter(usageStats)
+    }
+    @RequiresApi(Build.VERSION_CODES.Q)
+    private fun hasUsageStatsPermission(): Boolean {
+        val appOps = activity?.getSystemService(Context.APP_OPS_SERVICE) as android.app.AppOpsManager
+        val mode = activity?.packageName?.let {
+            appOps.unsafeCheckOpNoThrow("android:get_usage_stats", android.os.Process.myUid(),
+                it
+            )
+        }
+        return mode == android.app.AppOpsManager.MODE_ALLOWED
+    }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
+        if (!hasUsageStatsPermission()) {
+            startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
+        } else {
+            displayUsageStats()
+        }
+        return view
     }
 
     companion object {

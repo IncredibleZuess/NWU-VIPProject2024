@@ -25,16 +25,12 @@ import androidx.recyclerview.widget.RecyclerView
 class MainActivity : AppCompatActivity() {
     private lateinit var usernameEditText: EditText
     private lateinit var passwordEditText: EditText
+    private lateinit var recyclerView: RecyclerView
 
     /**
      * Checks if the user has granted the app permission to access their usage stats.
      */
-    @RequiresApi(Build.VERSION_CODES.Q)
-    private fun hasUsageStatsPermission(): Boolean {
-        val appOps = getSystemService(Context.APP_OPS_SERVICE) as android.app.AppOpsManager
-        val mode = appOps.unsafeCheckOpNoThrow("android:get_usage_stats", android.os.Process.myUid(),packageName)
-        return mode == android.app.AppOpsManager.MODE_ALLOWED
-    }
+
 
     /**
      * Queries the usage stats of the user and displays them in a RecyclerView.
@@ -53,10 +49,8 @@ class MainActivity : AppCompatActivity() {
     /**
      * Sets up the RecyclerView with the user's usage stats.
      */
-    private fun setupRecyclerView(usageStats: List<UsageStats>) {
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-    }
+
+
 
     /**
      * Called when the activity is created.
@@ -69,12 +63,6 @@ class MainActivity : AppCompatActivity() {
 
         usernameEditText = findViewById(R.id.username_input)
         passwordEditText = findViewById(R.id.password_input)
-
-        if (!hasUsageStatsPermission()) {
-            startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
-        } else {
-            trackUsage()
-        }
         val registerButton = findViewById<Button>(R.id.signup_button)
         registerButton.setOnClickListener{
         val intent = Intent(this , MainActivity2::class.java)
@@ -85,7 +73,7 @@ class MainActivity : AppCompatActivity() {
             val authentication = Authentication()
             val isValid = authentication.validateCredentials(usernameEditText.text.toString(), passwordEditText.text.toString())
             if (isValid) {
-                val intent = Intent(this , home_Activity::class.java)
+                val intent = Intent(this , HomeActivity::class.java)
                 startActivity(intent)
             }else{
                 Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show()
