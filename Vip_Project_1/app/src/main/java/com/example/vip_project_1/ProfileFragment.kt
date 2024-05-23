@@ -11,7 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Switch
-import androidx.compose.runtime.Composable
+import androidx.appcompat.app.AppCompatDelegate
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,6 +35,15 @@ class ProfileFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
 
+        view?.findViewById<Switch>(R.id.swDM)?.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                // Enable Dark Mode
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                // Disable Dark Mode
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
     }
 
     override fun onCreateView(
