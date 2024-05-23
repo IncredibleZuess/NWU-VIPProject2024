@@ -1,5 +1,6 @@
 package com.example.vip_project_1
 
+import android.app.usage.UsageStats
 import android.app.usage.UsageStatsManager
 import android.content.Context
 import android.content.Intent
@@ -13,6 +14,8 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,6 +37,10 @@ class MainActivity : AppCompatActivity() {
                 Log.d("UsageStats", "Package: ${usageStats.packageName}, Total Time: ${usageStats.totalTimeInForeground}")
             }
         }
+    }
+    private fun setupRecyclerView(usageStats: List<UsageStats>) {
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
     }
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
