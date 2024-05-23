@@ -30,8 +30,6 @@ class home_Activity : AppCompatActivity() {
             insets
         }
 
-        val Welcome: TextView = findViewById(R.id.WelcomeText)
-
         val bottomNav: BottomNavigationView = findViewById(R.id.bottom_nav_bar)
         bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
@@ -42,11 +40,6 @@ class home_Activity : AppCompatActivity() {
             }
             true
         }
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            // Fade out the TextView
-            fadeOutTextView(Welcome, bottomNav)
-        }, 5000) // 5000 milliseconds = 5 seconds
     }
     private fun replaceFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
@@ -57,25 +50,3 @@ class home_Activity : AppCompatActivity() {
     }
 }
 
-
-
-private fun fadeOutTextView(textView: TextView , bottomNavigationView: BottomNavigationView ){
-    // Create an ObjectAnimator to fade out the TextView
-    val fadeOut = ObjectAnimator.ofFloat(textView, "alpha", 1f, 0f)
-    fadeOut.duration = 1000 // Duration of the fade out animation in milliseconds
-
-    // Add a listener to change visibility after the animation ends
-    fadeOut.addListener(object : Animator.AnimatorListener {
-        override fun onAnimationStart(animation: Animator) {}
-        override fun onAnimationEnd(animation: Animator) {
-            textView.visibility = View.GONE
-            bottomNavigationView.visibility=View.VISIBLE
-
-        }
-        override fun onAnimationCancel(animation: Animator) {}
-        override fun onAnimationRepeat(animation: Animator) {}
-    })
-
-    // Start the fade out animation
-    fadeOut.start()
-}

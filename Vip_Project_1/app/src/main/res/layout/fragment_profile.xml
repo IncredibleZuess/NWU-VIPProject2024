@@ -9,15 +9,66 @@
     >
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Profile"
-        android:textSize="30sp"
+        android:id="@+id/textView2"
+        android:layout_width="400dp"
+        android:layout_height="50dp"
+        android:fontFamily="@font/paprika"
+        android:text="Settings"
+        android:textAlignment="center"
+        android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintVertical_bias="0.023" />
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="663dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+        <Button
+            android:id="@+id/btnAbout"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:fontFamily="@font/paprika"
+            android:text="About"
+            android:textSize="50sp" />
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:fontFamily="@font/paprika"
+            android:text="Delete Data"
+            android:textSize="50sp" />
+
+        <Switch
+            android:id="@+id/swDM"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:fontFamily="@font/paprika"
+            android:text="Toggle Dark Mode"
+            android:textAlignment="center"
+            android:textSize="25sp" />
+
+        <Switch
+            android:id="@+id/swData"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:fontFamily="@font/paprika"
+            android:text="Show Data"
+            android:textAlignment="center"
+            android:textSize="25sp" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
