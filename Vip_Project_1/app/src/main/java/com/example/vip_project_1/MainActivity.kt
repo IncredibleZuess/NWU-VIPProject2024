@@ -8,12 +8,17 @@ import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var usernameEditText: EditText
+    private lateinit var passwordEditText: EditText
+
     @RequiresApi(Build.VERSION_CODES.Q)
     private fun hasUsageStatsPermission(): Boolean {
         val appOps = getSystemService(Context.APP_OPS_SERVICE) as android.app.AppOpsManager
@@ -35,6 +40,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
+        usernameEditText = findViewById(R.id.username_input)
+        passwordEditText = findViewById(R.id.password_input)
+
         if (!hasUsageStatsPermission()) {
             startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
         } else {
@@ -47,8 +56,14 @@ class MainActivity : AppCompatActivity() {
         }
         val loginBtn = findViewById<Button>(R.id.login_button)
         loginBtn.setOnClickListener {
-            val intent = Intent(this , home_Activity::class.java)
-            startActivity(intent)
+            val authentication = Authentication()
+            val isValid = authentication.validateCredentials(usernameEditText.text.toString(), passwordEditText.text.toString())
+            if (isValid) {
+                val intent = Intent(this , home_Activity::class.java)
+                startActivity(intent)
+            }else{
+                Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show()
+            }
             }
         }
     }
