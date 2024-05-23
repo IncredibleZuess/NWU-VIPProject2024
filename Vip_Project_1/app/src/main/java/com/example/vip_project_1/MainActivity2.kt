@@ -1,3 +1,8 @@
+/**
+ * @author Carlo Barnardo
+ * @edtior Sebastian Klopper
+ */
+
 package com.example.vip_project_1
 
 import android.content.Intent
@@ -11,6 +16,9 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MainActivity2 : AppCompatActivity() {
+    /**
+     * Called when the activity is first created.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

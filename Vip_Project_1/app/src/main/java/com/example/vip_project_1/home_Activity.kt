@@ -1,3 +1,7 @@
+/**
+ * @author Carlo Barnardo
+ * @edtior Sebastian Klopper
+ */
 package com.example.vip_project_1
 
 import android.animation.Animator
@@ -19,6 +23,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class home_Activity : AppCompatActivity() {
+
+    /**
+     * Creates the Login page and handles the logic of the buttons
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -41,6 +49,10 @@ class home_Activity : AppCompatActivity() {
             true
         }
     }
+
+    /**
+     * Replaces the current fragment with the new one
+     */
     private fun replaceFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()

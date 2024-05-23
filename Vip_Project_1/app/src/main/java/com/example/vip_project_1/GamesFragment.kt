@@ -1,3 +1,7 @@
+/**
+ * @author Carlo Barnardo
+ * @edtior Sebastian Klopper
+ */
 package com.example.vip_project_1
 
 import android.os.Bundle

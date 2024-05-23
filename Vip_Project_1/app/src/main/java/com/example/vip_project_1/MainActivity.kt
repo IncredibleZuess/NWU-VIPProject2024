@@ -1,3 +1,7 @@
+/**
+ * @author Carlo Barnardo
+ * @edtior Sebastian Klopper
+ */
 package com.example.vip_project_1
 
 import android.app.usage.UsageStats
@@ -22,12 +26,19 @@ class MainActivity : AppCompatActivity() {
     private lateinit var usernameEditText: EditText
     private lateinit var passwordEditText: EditText
 
+    /**
+     * Checks if the user has granted the app permission to access their usage stats.
+     */
     @RequiresApi(Build.VERSION_CODES.Q)
     private fun hasUsageStatsPermission(): Boolean {
         val appOps = getSystemService(Context.APP_OPS_SERVICE) as android.app.AppOpsManager
         val mode = appOps.unsafeCheckOpNoThrow("android:get_usage_stats", android.os.Process.myUid(),packageName)
         return mode == android.app.AppOpsManager.MODE_ALLOWED
     }
+
+    /**
+     * Queries the usage stats of the user and displays them in a RecyclerView.
+     */
     private fun trackUsage() {
         val usageStatsManager = getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
         val currentTime = System.currentTimeMillis()
@@ -38,10 +49,18 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    /**
+     * Sets up the RecyclerView with the user's usage stats.
+     */
     private fun setupRecyclerView(usageStats: List<UsageStats>) {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
     }
+
+    /**
+     * Called when the activity is created.
+     */
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
