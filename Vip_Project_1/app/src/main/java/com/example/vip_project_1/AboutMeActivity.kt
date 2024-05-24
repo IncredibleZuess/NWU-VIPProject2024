@@ -5,6 +5,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import android.widget.LinearLayout
+import android.widget.TextView
 
 class AboutMeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +21,13 @@ class AboutMeActivity : AppCompatActivity() {
         }
         setContentView(R.layout.activity_about_me)
 
-        //val lltAboutMe = findViewById<LinearLayout>(R.id.lltAboutMe)
-    }
+        // Find the LinearLayout by its ID
+        val lltAboutMe = findViewById<LinearLayout>(R.id.lltAboutMe)
 
+        val AboutMe_text = TextView(this)
+        AboutMe_text.text = "This is my About Me page"
+        AboutMe_text.textSize = 16f
+        lltAboutMe.addView(AboutMe_text)
+
+    }
 }
