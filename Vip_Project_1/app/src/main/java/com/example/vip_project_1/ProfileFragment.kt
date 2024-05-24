@@ -5,11 +5,13 @@
 
 package com.example.vip_project_1
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Switch
 import androidx.appcompat.app.AppCompatDelegate
 
@@ -28,6 +30,9 @@ class ProfileFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    //button about
+    private lateinit var btnAbout: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -43,7 +48,13 @@ class ProfileFragment : Fragment() {
                 // Disable Dark Mode
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
+
+            activity?.recreate()
         }
+
+
+
+
     }
 
     /**
@@ -55,6 +66,16 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        btnAbout = view.findViewById(R.id.btnAbout)
+
+        btnAbout.setOnClickListener{
+            startActivity(Intent(activity, AboutMeActivity::class.java))
+        }
     }
 
     companion object {

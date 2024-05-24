@@ -57,11 +57,11 @@
             android:id="@+id/swDM"
             android:layout_width="match_parent"
             android:layout_height="100sp"
+            android:checked="false"
             android:fontFamily="@font/paprika"
             android:text="Toggle Dark Mode"
             android:textAlignment="center"
-            android:textSize="25sp"
-            android:checked="false"/>
+            android:textSize="25sp" />
 
         <Switch
             android:id="@+id/swData"
