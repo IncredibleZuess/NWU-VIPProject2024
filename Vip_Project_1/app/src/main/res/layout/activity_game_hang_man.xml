@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GameHangManActivity">
+
+    <ImageView
+        android:id="@+id/imgViewHangMan"
+        android:layout_width="414dp"
+        android:layout_height="350dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/hangman_0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+    <TextView
+        android:id="@+id/txtYouLost"
+        android:layout_width="203dp"
+        android:layout_height="148dp"
+        android:fontFamily="@font/paprika"
+        android:rotation="-51"
+        android:text="You Lost"
+        android:textAlignment="center"
+        android:textColor="#D32F2F"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imgViewHangMan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imgViewHangMan"
+        app:layout_constraintVertical_bias="0.33"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/txtYouWon"
+        android:layout_width="213dp"
+        android:layout_height="194dp"
+        android:fontFamily="@font/paprika"
+        android:rotation="39"
+        android:text="You Won"
+        android:textAlignment="center"
+        android:textColor="#388E3C"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imgViewHangMan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imgViewHangMan"
+        app:layout_constraintVertical_bias="0.43" />
+
+
+    <TextView
+        android:id="@+id/txtWordView"
+        android:layout_width="412dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/paprika"
+        android:gravity="center"
+        android:letterSpacing="0.2"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgViewHangMan"
+        tools:text="_ _ A B C D_ _ _ _ _ _ _ " />
+
+
+    <TextView
+        android:id="@+id/txtUsedLetters"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/paprika"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtWordView"
+        tools:text="Used letters: A, B, C, D, E, F, G" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lettersLayout"
+        android:layout_width="412dp"
+        android:layout_height="271dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtUsedLetters">
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/flow"
+            android:layout_width="410dp"
+            android:layout_height="279dp"
+            android:fontFamily="@font/paprika"
+            app:flow_horizontalGap="5dp"
+            app:flow_horizontalStyle="spread"
+            app:flow_maxElementsWrap="9"
+            app:flow_verticalGap="5dp"
+            app:flow_verticalStyle="spread"
+            app:flow_wrapMode="chain"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:constraint_referenced_ids="a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Define letter TextViews with common style and IDs -->
+        <TextView
+            android:id="@+id/a"
+            style="@style/LetterStyle"
+            android:fontFamily="@font/paprika"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:text="A"
+            app:layout_constraintDimensionRatio="w,1:1"
+            tools:layout_editor_absoluteX="16dp" />
+
+        <TextView
+            android:id="@+id/b"
+            style="@style/LetterStyle"
+            android:layout_width="29dp"
+            android:layout_height="30dp"
+            android:fontFamily="@font/paprika"
+            android:text="B" />
+
+        <TextView
+            android:id="@+id/c"
+            style="@style/LetterStyle"
+            android:layout_width="26dp"
+            android:layout_height="29dp"
+            android:fontFamily="@font/paprika"
+            android:text="C" />
+
+        <TextView
+            android:id="@+id/d"
+            style="@style/LetterStyle"
+            android:fontFamily="@font/paprika"
+            android:text="D" />
+
+        <TextView
+            android:id="@+id/e"
+            style="@style/LetterStyle"
+            android:fontFamily="@font/paprika"
+            android:text="E" />
+
+        <TextView
+            android:id="@+id/f"
+            style="@style/LetterStyle"
+            android:fontFamily="@font/paprika"
+            android:text="F" />
+
+        <TextView
+            android:id="@+id/g"
+            style="@style/LetterStyle"
+            android:fontFamily="@font/paprika"
+            android:text="G" />
+
+        <TextView
+            android:id="@+id/h"
+            style="@style/LetterStyle"
+            android:fontFamily="@font/paprika"
+            android:text="H" />
+
+        <TextView
+            android:id="@+id/i"
+            style="@style/LetterStyle"
+            android:fontFamily="@font/paprika"
+            android:text="I" />
+
+        <TextView
+            android:id="@+id/j"
+            style="@style/LetterStyle"
+            android:fontFamily="@font/paprika"
+            android:text="J" />
+
+        <TextView
+            android:id="@+id/k"
+            style="@style/LetterStyle"
+            android:fontFamily="@font/paprika"
+            android:text="K" />
+
+        <TextView
+            android:id="@+id/l"
+            style="@style/LetterStyle"
+            android:fontFamily="@font/paprika"
+            android:text="L" />
+
+        <TextView
+            android:id="@+id/m"
+            style="@style/LetterStyle"
+            android:fontFamily="@font/paprika"
+            android:text="M" />
+
+        <TextView
+            android:id="@+id/n"
+            style="@style/LetterStyle"
+            android:fontFamily="@font/paprika"
+            android:text="N" />
+
+        <TextView
+            android:id="@+id/o"
+            style="@style/LetterStyle"
+            android:fontFamily="@font/paprika"
+            android:text="O" />
+
+        <TextView
+            android:id="@+id/p"
+            style="@style/LetterStyle"
+            android:fontFamily="@font/paprika"
+            android:text="P" />
+
+        <TextView
+            android:id="@+id/q"
+            style="@style/LetterStyle"
+            android:fontFamily="@font/paprika"
+            android:text="Q" />
+
+        <TextView
+            android:id="@+id/r"
+            style="@style/LetterStyle"
+            android:fontFamily="@font/paprika"
+            android:text="R" />
+
+        <TextView
+            android:id="@+id/s"
+            style="@style/LetterStyle"
+            android:fontFamily="@font/paprika"
+            android:text="S" />
+
+        <TextView
+            android:id="@+id/t"
+            style="@style/LetterStyle"
+            android:fontFamily="@font/paprika"
+            android:text="T" />
+
+        <TextView
+            android:id="@+id/u"
+            style="@style/LetterStyle"
+            android:fontFamily="@font/paprika"
+            android:text="U" />
+
+        <TextView
+            android:id="@+id/v"
+            style="@style/LetterStyle"
+            android:fontFamily="@font/paprika"
+            android:text="V" />
+
+        <TextView
+            android:id="@+id/w"
+            style="@style/LetterStyle"
+            android:fontFamily="@font/paprika"
+            android:text="W" />
+
+        <TextView
+            android:id="@+id/x"
+            style="@style/LetterStyle"
+            android:fontFamily="@font/paprika"
+            android:text="X" />
+
+        <TextView
+            android:id="@+id/y"
+            style="@style/LetterStyle"
+            android:fontFamily="@font/paprika"
+            android:text="Y" />
+
+        <TextView
+            android:id="@+id/z"
+            style="@style/LetterStyle"
+            android:fontFamily="@font/paprika"
+            android:text="Z" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

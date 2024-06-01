@@ -37,12 +37,12 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
         <Button
-            android:id="@+id/btnCrossword"
+            android:id="@+id/btnSearchWord"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="205sp"
             android:fontFamily="@font/paprika"
-            android:text="Crossword"
+            android:text="WORDSEARCH"
             android:textSize="30sp" />
 
         <Button
@@ -55,12 +55,12 @@
             android:textSize="30sp" />
 
         <Button
-            android:id="@+id/btnHang"
+            android:id="@+id/btnHangMan"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="205sp"
             android:fontFamily="@font/paprika"
-            android:text="Hange me please"
+            android:text="Hange Man"
             android:textSize="30sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
