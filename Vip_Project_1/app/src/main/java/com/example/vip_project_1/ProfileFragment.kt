@@ -117,7 +117,7 @@ class ProfileFragment : Fragment(), PinDailogFragment.PinDialogListener {
 
     }
     override fun onPinEntered(pin: String) {
-        //make sure to add the correct pin
+        //make sure to add the correct pin here
         val correctPin = "000000" // Replace with the actual PIN check logic
         if (pin == correctPin) {
             val sharedPreferencesData =
