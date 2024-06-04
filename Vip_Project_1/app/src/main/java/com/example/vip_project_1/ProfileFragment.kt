@@ -5,6 +5,7 @@
 
 package com.example.vip_project_1
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -32,6 +33,7 @@ class ProfileFragment : Fragment() {
 
     //button about
     private lateinit var btnAbout: Button
+    private lateinit var switch: Switch
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,22 +41,6 @@ class ProfileFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
-        view?.findViewById<Switch>(R.id.swDM)?.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                // Enable Dark Mode
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            } else {
-                // Disable Dark Mode
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
-
-            activity?.recreate()
-        }
-
-
-
-
     }
 
     /**
@@ -72,10 +58,36 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         btnAbout = view.findViewById(R.id.btnAbout)
+        switch = view.findViewById(R.id.swDM)
+
+        val sharedPreferences = activity?.getSharedPreferences("Mode", Context.MODE_PRIVATE)
+        val editor = sharedPreferences?.edit()
+        val nightMode = sharedPreferences?.getBoolean("DarkMode", false) ?: false
+
+        switch.isChecked = nightMode
+        AppCompatDelegate.setDefaultNightMode(
+            if (nightMode) AppCompatDelegate.MODE_NIGHT_YES
+            else AppCompatDelegate.MODE_NIGHT_NO
+        )
+
+        switch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                editor?.putBoolean("DarkMode", true)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                editor?.putBoolean("DarkMode", false)
+            }
+            editor?.apply()
+            activity?.recreate()
+        }
+
+
 
         btnAbout.setOnClickListener{
             startActivity(Intent(activity, AboutMeActivity::class.java))
         }
+
     }
 
     companion object {
