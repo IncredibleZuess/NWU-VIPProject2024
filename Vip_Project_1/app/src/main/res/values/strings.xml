@@ -3,6 +3,7 @@
     <string name="name">Placeholder</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <style name="LetterStyle">
         <item name="android:layout_width">32dp</item>
         <item name="android:layout_height">32dp</item>

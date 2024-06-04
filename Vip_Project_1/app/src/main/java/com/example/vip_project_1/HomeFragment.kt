@@ -7,8 +7,10 @@ package com.example.vip_project_1
 
 import android.app.usage.UsageStats
 import android.app.usage.UsageStatsManager
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -46,6 +48,7 @@ class HomeFragment : Fragment() {
         }
     }
     private fun displayUsageStats() {
+
         val usageStatsManager = activity?.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
         val currentTime = System.currentTimeMillis()
         val stats = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, currentTime- 1000*60*60*24, currentTime)
@@ -69,6 +72,8 @@ class HomeFragment : Fragment() {
         return mode == android.app.AppOpsManager.MODE_ALLOWED
     }
 
+
+
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,12 +82,42 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
-        if (!hasUsageStatsPermission()) {
-            startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
-        } else {
-            displayUsageStats()
+
+        val sharedPreferencesData = activity?.getSharedPreferences("ShowData", Context.MODE_PRIVATE)
+        val showData = sharedPreferencesData?.getBoolean("ShowData", false)
+        if (showData == true) {
+            if (!hasUsageStatsPermission()) {
+                startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
+            } else {
+                displayUsageStats()
+            }
         }
+        // Register broadcast receiver to listen for SHOW_DATA_CHANGED intent
+        val filter = IntentFilter("com.example.vip_project_1.SHOW_DATA_CHANGED")
+        activity?.registerReceiver(dataChangeReceiver, filter)
+
+
+
         return view
+    }
+    // BroadcastReceiver to handle data change events
+    private val dataChangeReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (intent?.action == "com.example.vip_project_1.SHOW_DATA_CHANGED") {
+                val sharedPreferencesData = activity?.getSharedPreferences("ShowData", Context.MODE_PRIVATE)
+                val showData = sharedPreferencesData?.getBoolean("ShowData", false) ?: false
+                if (showData) {
+                    displayUsageStats()
+                } else {
+                    recyclerView.adapter = null
+                }
+            }
+        }
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // Unregister the broadcast receiver when the view is destroyed
+        activity?.unregisterReceiver(dataChangeReceiver)
     }
 
     companion object {
