@@ -59,6 +59,9 @@ class ProfileFragment : Fragment(), PinDailogFragment.PinDialogListener {
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
+    /**
+     * Sets up the button click listeners and shared preferences
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -71,6 +74,9 @@ class ProfileFragment : Fragment(), PinDailogFragment.PinDialogListener {
         val editor = sharedPreferences?.edit()
         val nightMode = sharedPreferences?.getBoolean("DarkMode", false) ?: false
 
+        /**
+         * Sets the Color scheme to the correct state based on the shared preferences
+         */
         switch.isChecked = nightMode
         AppCompatDelegate.setDefaultNightMode(
             if (nightMode) AppCompatDelegate.MODE_NIGHT_YES
@@ -116,6 +122,12 @@ class ProfileFragment : Fragment(), PinDailogFragment.PinDialogListener {
         }
 
     }
+
+    /**
+     * @author Liam Craven
+     *
+     * Handles the pin authentication for admin access
+     */
     override fun onPinEntered(pin: String) {
         //make sure to add the correct pin here
         val correctPin = "000000" // Replace with the actual PIN check logic
@@ -145,7 +157,7 @@ class ProfileFragment : Fragment(), PinDailogFragment.PinDialogListener {
          * @param param2 Parameter 2.
          * @return A new instance of fragment ProfileFragment.
          */
-        // TODO: Rename and change types and number of parameters
+
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             ProfileFragment().apply {

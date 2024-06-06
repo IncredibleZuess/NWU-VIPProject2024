@@ -1,5 +1,5 @@
 /**
- * @author Carlo Barnardo
+ * @author Liam Craven
  * @editor Sebastian Klopper
  */
 package com.example.vip_project_1
@@ -60,6 +60,10 @@ class GamesFragment : Fragment() {
         val startWordSearch: Button = view.findViewById(R.id.btnSearchWord)
         val startMath: Button = view.findViewById(R.id.btnMath)
         val startHangman: Button = view.findViewById(R.id.btnHangMan)
+
+        /**
+         * Handles the redirect to the correct game activity
+         */
 
         startWordSearch.setOnClickListener {
             val intent = Intent(activity, GameDifficultyActivity::class.java)

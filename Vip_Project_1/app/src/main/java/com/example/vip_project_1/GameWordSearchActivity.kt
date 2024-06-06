@@ -74,6 +74,9 @@ class GameWordSearchActivity : AppCompatActivity() {
         generateGrid()
         displayWordList()
 
+        /**
+         * Handle touch events on the grid
+         */
         wordSearchGrid.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -108,6 +111,9 @@ class GameWordSearchActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Generate the grid with random letters
+     */
     private fun generateGrid() {
         gridData = Array(gridSize) { Array(gridSize) { ' ' } }
 
@@ -136,6 +142,9 @@ class GameWordSearchActivity : AppCompatActivity() {
         wordSearchGrid.adapter = gridAdapter
     }
 
+    /**
+     * Place the words on the grid
+     */
     private fun placeWord(word: String) {
         val wordLength = word.length
 
@@ -199,6 +208,9 @@ class GameWordSearchActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Display the word list
+     */
     private fun displayWordList() {
         val wordListString = StringBuilder()
 
@@ -208,6 +220,9 @@ class GameWordSearchActivity : AppCompatActivity() {
         wordListText.text = wordListString.toString()
     }
 
+    /**
+     * Check if the selected word is in the word list
+     */
     private fun checkWord() {
         val foundWord = selectedWord.toString()
         val foundIndex = wordList.indexOf(foundWord)
@@ -230,6 +245,9 @@ class GameWordSearchActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Highlight the found word on the grid
+     */
     private fun highlightFoundWord(word: String) {
         val positions = wordPositions[word]
         if (positions != null) {
@@ -242,6 +260,9 @@ class GameWordSearchActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Clear the highlighted characters on the grid
+     */
     private fun clearHighlightedCharacters() {
         for (i in 0 until wordSearchGrid.childCount) {
             val textView = wordSearchGrid.getChildAt(i) as? TextView
@@ -249,6 +270,9 @@ class GameWordSearchActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Exit the activity and return the result to main page
+     */
     fun exitActivity(view: View) {
         if(amountofwords>0)
         {
@@ -259,6 +283,9 @@ class GameWordSearchActivity : AppCompatActivity() {
         finish()
     }
 
+    /**
+     * Check if the game is over and display a message
+     */
     private fun gameOver(amountofwords: Int) {
         if (amountofwords <= 0) {
             wordListText.text = "Congratulations YOU WON"

@@ -1,3 +1,10 @@
+/**
+ * @author Liam Craven
+ * @editor Sebastian Klopper
+ *
+ * A pop up input to enter a PIN to access admin features
+ */
+
 package com.example.vip_project_1
 
 import android.os.Bundle
@@ -19,6 +26,9 @@ class PinDailogFragment : DialogFragment() {
         fun onPinEntered(pin: String)
     }
 
+    /**
+     * Override the onAttach method to instantiate the listener
+     */
     override fun onAttach(context: Context) {
         super.onAttach(context)
         try {
@@ -28,6 +38,9 @@ class PinDailogFragment : DialogFragment() {
         }
     }
 
+    /**
+     * Override the onCreateDialog method to create the dialog
+     */
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
