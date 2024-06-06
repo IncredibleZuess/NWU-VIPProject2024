@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".GameWordSearchActivity">
+
+    <GridView
+        android:id="@+id/wordSearchGrid"
+        android:layout_width="wrap_content"
+        android:layout_height="560dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="6dp"
+        android:gravity="top"
+        android:horizontalSpacing="1dp"
+        android:numColumns="8"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="1dp"
+        android:fontFamily="@font/paprika"/>
+
+
+    <TextView
+        android:id="@+id/wordListText"
+        android:layout_width="280dp"
+        android:layout_height="176dp"
+        android:layout_below="@id/wordSearchGrid"
+        android:fontFamily="@font/paprika"
+        android:layout_marginTop="-7dp"
+        android:gravity="center"
+        android:text="Word List"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btnExit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="17dp"
+        android:layout_marginBottom="88dp"
+        android:fontFamily="@font/paprika"
+        android:text="Exit"
+        android:onClick="exitActivity"/>
+
+</RelativeLayout>

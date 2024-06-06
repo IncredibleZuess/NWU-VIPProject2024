@@ -7,20 +7,12 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:padding="16dp"
-    tools:context=".home_Activity">
+    tools:context=".HomeActivity">
 
     <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Welcome"
-        android:textSize="32dp"
-        android:textAlignment="center"
-        android:id="@+id/WelcomeText"
-        />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"

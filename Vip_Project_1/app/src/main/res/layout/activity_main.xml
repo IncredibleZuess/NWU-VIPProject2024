@@ -23,54 +23,61 @@
        <TextView
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:text="Welcome back (name) !"
+           android:layout_marginTop="32dp"
+           android:fontFamily="@font/paprika"
+           android:text="Welcome back!"
            android:textAlignment="center"
-           android:textSize="18sp"
            android:textColor="@color/black"
-           android:layout_marginTop="32dp"/>
-       
+           android:textSize="18sp" />
+
        <EditText
+           android:id="@+id/username_input"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:layout_marginTop="32dp"
+           android:background="@drawable/rounded_corner"
+           android:fontFamily="@font/paprika"
            android:hint="Username"
+           android:inputType="textEmailAddress"
+           android:padding="18dp"
            android:textColor="@color/black"
            android:textColorHint="@color/black"
-           android:textSize="20sp"
-           android:background="@drawable/rounded_corner"
-           android:padding="18dp"
-           android:inputType="textEmailAddress"
-           android:id="@+id/username_input"/>
+           android:textSize="20sp" />
 
        <EditText
+           android:id="@+id/password_input"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:layout_marginTop="16dp"
+           android:background="@drawable/rounded_corner"
+           android:fontFamily="@font/paprika"
            android:hint="Pin"
+           android:inputType="textPassword"
+           android:padding="18dp"
            android:textColor="@color/black"
            android:textColorHint="@color/black"
-           android:textSize="20sp"
-           android:background="@drawable/rounded_corner"
-           android:padding="18dp"
-           android:inputType="textPassword"
-           android:id="@+id/password_input"/>
+           android:textSize="20sp" />
+
        <Button
+           android:id="@+id/login_button"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:text="Login"
-           android:backgroundTint="#0000FF"
-           android:padding="18dp"
            android:layout_marginTop="32dp"
-           android:textSize="20sp"
-           android:id="@+id/login_button"/>
+           android:backgroundTint="#0000FF"
+           android:fontFamily="@font/paprika"
+           android:padding="18dp"
+           android:text="Login"
+           android:textSize="20sp" />
+
        <TextView
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:text="Dont have an Account? Sign Up!"
+           android:layout_marginTop="32dp"
+           android:fontFamily="@font/paprika"
+           android:text="Dont have an Account?"
            android:textAlignment="center"
-           android:textSize="18sp"
            android:textColor="@color/black"
-           android:layout_marginTop="32dp"/>
+           android:textSize="18sp" />
 
        <Button
            android:layout_width="match_parent"
