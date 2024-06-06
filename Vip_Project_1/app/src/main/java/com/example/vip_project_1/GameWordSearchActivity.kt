@@ -1,3 +1,8 @@
+/**
+ * @author Liam Craven
+ * @editor Sebastian Klopper
+ */
+
 package com.example.vip_project_1
 
 import android.graphics.Color
@@ -18,6 +23,9 @@ import android.content.Intent
 
 
 class GameWordSearchActivity : AppCompatActivity() {
+    /**
+     * Variable initialization
+     */
     private var wordList = listOf("")
     private var amountofwords = wordList.size
 
@@ -38,6 +46,9 @@ class GameWordSearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_word_search)
 
+        /**
+         * Get the difficulty level from the intent
+         */
         val difficultyLevel = intent.getStringExtra("difficulty_level")
         if (difficultyLevel == "Easy") {
             wordList = listOf("NINE", "TOWN", "CROWN", "STUDIO", "WORD", "SEARCH", "GAME", "LAME")
@@ -51,9 +62,15 @@ class GameWordSearchActivity : AppCompatActivity() {
             amountofwords = wordList.size
         }
 
+        /**
+         * Initialize the views
+         */
         wordSearchGrid = findViewById(R.id.wordSearchGrid)
         wordListText = findViewById(R.id.wordListText)
 
+        /**
+         * Generate the grid and display the word list
+         */
         generateGrid()
         displayWordList()
 

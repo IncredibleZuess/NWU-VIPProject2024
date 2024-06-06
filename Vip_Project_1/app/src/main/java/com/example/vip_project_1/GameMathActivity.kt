@@ -1,3 +1,8 @@
+/**
+ * @author Liam Craven
+ * @editor Sebastian Klopper
+ */
+
 package com.example.vip_project_1
 
 import android.os.Bundle
@@ -17,6 +22,9 @@ import android.os.Looper
 
 class GameMathActivity : AppCompatActivity() {
 
+    /**
+     * Initialize variables
+     */
     private lateinit var answerEditText: EditText
     private lateinit var displayQuestion: TextView
     private lateinit var submitAnswer: Button
@@ -28,6 +36,9 @@ class GameMathActivity : AppCompatActivity() {
     private var numQuestions = 0
     private var questionIndex = 0
 
+    /**
+     * Generate a list of questions and answers
+     */
     private fun getListQuestions(numQuestions: Int, maxNumber: Int) {
         val operators = listOf("+", "-", "*", "/")
         while (questionArray.size < numQuestions) {
@@ -84,6 +95,9 @@ class GameMathActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Game over screen
+     */
     private fun GameOver() {
         displayQuestion.text = "Game Over! Correct: $numCorrect, Incorrect: $numIncorrect"
         val total = numCorrect + numIncorrect
@@ -96,6 +110,9 @@ class GameMathActivity : AppCompatActivity() {
         }, 2000)
     }
 
+    /**
+     * Check answer
+     */
     private fun checkAnswer(answer: String) {
         val userAnswer = answer.toIntOrNull()
         if (userAnswer != null) {
@@ -117,6 +134,9 @@ class GameMathActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Display question
+     */
     private fun questionDisplay(questionIndex: Int) {
         displayQuestion.text = questionArray[questionIndex]
         correctAnswer = answerArray[questionIndex]
@@ -132,6 +152,9 @@ class GameMathActivity : AppCompatActivity() {
             insets
         }
 
+        /**
+         * Gets the difficulty of the game and sets the number of questions and type
+         */
         displayQuestion = findViewById(R.id.txtMathProb)
         answerEditText = findViewById(R.id.txtAnsw_Input)
         submitAnswer = findViewById(R.id.btnSubmit)
