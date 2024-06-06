@@ -78,7 +78,7 @@ The settings menu is divided into two main categories:
     - A greeting for the user.
 
 2. **Usage Summary:**
-    - A bar graph showing app usage for the day.
+    - A view showing app usage for the day.
 
 ### Navigation
 
