@@ -1,6 +1,6 @@
 /**
  * @author Carlo Barnardo
- * @edtior Sebastian Klopper
+ * @editor Sebastian Klopper
  */
 package com.example.vip_project_1
 
@@ -18,6 +18,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ServiceCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -25,20 +26,13 @@ import androidx.recyclerview.widget.RecyclerView
 class MainActivity : AppCompatActivity() {
     private lateinit var usernameEditText: EditText
     private lateinit var passwordEditText: EditText
-    private lateinit var recyclerView: RecyclerView
 
     /**
      * Queries the usage stats of the user and displays them in a RecyclerView.
      */
-    private fun trackUsage() {
-        val usageStatsManager = getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
-        val currentTime = System.currentTimeMillis()
-        val stats = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, currentTime- 1000*60*60*24, currentTime)
-        if (stats != null) {
-            for (usageStats in stats) {
-                Log.d("UsageStats", "Package: ${usageStats.packageName}, Total Time: ${usageStats.totalTimeInForeground}")
-            }
-        }
+    private fun startService() {
+        val context = applicationContext
+        context.startService(Intent(context, BlockApp::class.java))
     }
 
 
@@ -47,10 +41,10 @@ class MainActivity : AppCompatActivity() {
      */
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
+        startService()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-
         usernameEditText = findViewById(R.id.username_input)
         passwordEditText = findViewById(R.id.password_input)
         val registerButton = findViewById<Button>(R.id.signup_button)

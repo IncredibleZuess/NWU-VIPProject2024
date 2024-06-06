@@ -1,6 +1,6 @@
 /**
  * @author Carlo Barnardo
- * @edtior Sebastian Klopper
+ * @editor Sebastian Klopper
  */
 
 package com.example.vip_project_1

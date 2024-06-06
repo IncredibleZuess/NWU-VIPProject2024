@@ -23,44 +23,37 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment() {
 
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var recyclerView: RecyclerView
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
+
+
+    // Initiate the usage stats manager and query the usage stats for the last 24 hours and filter by user installed apps
     private fun displayUsageStats() {
 
         val usageStatsManager = activity?.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
         val currentTime = System.currentTimeMillis()
+        // Query the usage stats for the last 24 hours and filter by user installed apps
         val stats = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, currentTime- 1000*60*60*24, currentTime)
+        val userInstalledApps = activity?.packageManager?.queryIntentActivities(Intent(Intent.ACTION_MAIN, null).addCategory(Intent.CATEGORY_LAUNCHER), 0)
+        // Sort the usage stats by total time in foreground and setup the recycler view
         if (stats != null) {
             val sortedStats = stats.sortedByDescending { it.totalTimeInForeground }
-            setupRecyclerView(sortedStats)
+            val filteredStats = sortedStats.filter { userInstalledApps?.any { app -> app.activityInfo.packageName == it.packageName } == true }
+            setupRecyclerView(filteredStats)
         }
     }
+    // Setup the recycler view with the usage stats
     private fun setupRecyclerView(usageStats: List<UsageStats>) {
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.adapter = UsageStatsAdapter(usageStats)
     }
+    // Check if the user has granted the usage stats permission
     @RequiresApi(Build.VERSION_CODES.Q)
     private fun hasUsageStatsPermission(): Boolean {
         val appOps = activity?.getSystemService(Context.APP_OPS_SERVICE) as android.app.AppOpsManager
@@ -81,6 +74,14 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
+
+        recyclerView = view.findViewById(R.id.recyclerView)
+        // Check if the user has granted the usage stats permission else run the request
+        if (!hasUsageStatsPermission()) {
+            startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
+        } else {
+            displayUsageStats()
+
         recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
 
         val sharedPreferencesData = activity?.getSharedPreferences("ShowData", Context.MODE_PRIVATE)

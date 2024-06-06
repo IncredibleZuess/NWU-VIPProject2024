@@ -1,14 +1,16 @@
 /**
  * @author Carlo Barnardo
- * @edtior Sebastian Klopper
+ * @editor Sebastian Klopper
  */
 
 package com.example.vip_project_1
 
 import android.app.usage.UsageStats
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -41,15 +43,25 @@ class UsageStatsAdapter (private val usageStats: List<UsageStats>) : RecyclerVie
      * ViewHolder for the usage stats item.
      */
     class UsageStatsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        //Show app name as readable text and usage time as readable text with app icon
         private val appNameTextView: TextView = itemView.findViewById(R.id.app_name)
+        private val appIconImageView: ImageView = itemView.findViewById(R.id.app_icon)
         private val usageTimeTextView: TextView = itemView.findViewById(R.id.usage_time)
 
         /**
          * Binds the usage stats data to the view holder.
          */
         fun bind(usageStats: UsageStats) {
-            appNameTextView.text = usageStats.packageName
+            // Only show user installed apps
             usageTimeTextView.text = formatUsageTime(usageStats.totalTimeInForeground)
+            try {
+                appNameTextView.text = itemView.context.packageManager.getApplicationLabel(itemView.context.packageManager.getApplicationInfo(usageStats.packageName, 0))
+                val appInfo = itemView.context.packageManager.getApplicationInfo(usageStats.packageName, 0)
+                val appIcon: Drawable = itemView.context.packageManager.getApplicationIcon(appInfo)
+                appIconImageView.setImageDrawable(appIcon)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
 
         /**
