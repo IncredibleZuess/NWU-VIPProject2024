@@ -1,5 +1,5 @@
 /**
- * @author Carlo Barnardo
+ * @author Liam Craven
  * @editor Sebastian Klopper
  */
 package com.example.vip_project_1
@@ -9,10 +9,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.content.Intent
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import android.app.Activity
+import android.widget.Toast
 
-// TODO: Rename parameter arguments, choose names that match
-// TODO: RENAME HANG ME PLEASE
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
@@ -22,15 +25,28 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class GamesFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var selectedGameLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+        }
+
+        // Initialize the ActivityResultLauncher
+        selectedGameLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data = result.data
+                val userWon = data?.getBooleanExtra("user_won", false) ?: false
+                if (userWon) {
+                    Toast.makeText(requireContext(), "Congratulations, you won the game!", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(requireContext(), "Better luck next time!", Toast.LENGTH_LONG).show()
+                }
+            }
         }
     }
 
@@ -39,7 +55,35 @@ class GamesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_games, container, false)
+        val view = inflater.inflate(R.layout.fragment_games, container, false)
+
+        val startWordSearch: Button = view.findViewById(R.id.btnSearchWord)
+        val startMath: Button = view.findViewById(R.id.btnMath)
+        val startHangman: Button = view.findViewById(R.id.btnHangMan)
+
+        /**
+         * Handles the redirect to the correct game activity
+         */
+
+        startWordSearch.setOnClickListener {
+            val intent = Intent(activity, GameDifficultyActivity::class.java)
+            intent.putExtra("game_type", "WordSearch")
+            selectedGameLauncher.launch(intent)
+        }
+
+        startMath.setOnClickListener {
+            val intent = Intent(activity, GameDifficultyActivity::class.java)
+            intent.putExtra("game_type", "Math")
+            selectedGameLauncher.launch(intent)
+        }
+
+        startHangman.setOnClickListener {
+            val intent = Intent(activity, GameDifficultyActivity::class.java)
+            intent.putExtra("game_type", "Hangman")
+            selectedGameLauncher.launch(intent)
+        }
+
+        return view
     }
 
     companion object {
@@ -51,7 +95,6 @@ class GamesFragment : Fragment() {
          * @param param2 Parameter 2.
          * @return A new instance of fragment GamesFragment.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             GamesFragment().apply {

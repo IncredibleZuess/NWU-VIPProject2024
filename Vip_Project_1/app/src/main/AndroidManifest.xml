@@ -31,6 +31,18 @@
 
         </service>
         <activity
+            android:name=".GameHangManActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GameMathActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GameDifficultyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GameWordSearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".AboutMeActivity"
             android:exported="false" />
         <activity
