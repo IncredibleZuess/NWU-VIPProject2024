@@ -29,17 +29,17 @@ class MainActivity2 : AppCompatActivity() {
             insets
         }
 
-        val BacktoLoginbtn = findViewById<Button>(R.id.login_button)
-        BacktoLoginbtn.setOnClickListener {
-            val Intent = Intent(this , MainActivity::class.java)
-            startActivity(Intent)
+        val backToLogin = findViewById<Button>(R.id.login_button)
+        backToLogin.setOnClickListener {
+            val intent = Intent(this , MainActivity::class.java)
+            startActivity(intent)
         }
 
-        val GeneratePinbtn : Button=findViewById(R.id.pin_button)
-        val Showpin: TextView=findViewById(R.id.pin1)
+        val generatePinButton : Button=findViewById(R.id.pin_button)
+        val showPin: TextView=findViewById(R.id.pin1)
 
-        GeneratePinbtn.setOnClickListener {
-            Showpin.visibility = View.VISIBLE
+        generatePinButton.setOnClickListener {
+            showPin.visibility = View.VISIBLE
         }
 
 
