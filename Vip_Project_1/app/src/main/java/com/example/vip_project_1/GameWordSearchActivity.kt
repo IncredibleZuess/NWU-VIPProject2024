@@ -275,7 +275,7 @@ class GameWordSearchActivity : AppCompatActivity() {
     /**
      * Exit the activity and return the result to main page
      */
-    fun exitActivity() {
+    fun exitActivity(view: View) {
         if(amountOfWords>0)
         {
             val data = Intent()
