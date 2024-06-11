@@ -112,8 +112,8 @@ class ProfileFragment : Fragment(), PinDailogFragment.PinDialogListener {
             } else {
                 editorData?.putBoolean("ShowData", false)
                 editorData?.apply()
-                val intent = Intent("com.example.vip_project_1.SHOW_DATA_CHANGED")
-                activity?.sendBroadcast(intent)
+//                val intent = Intent("com.example.vip_project_1.SHOW_DATA_CHANGED")
+//                activity?.sendBroadcast(intent)
             }
         }
 
