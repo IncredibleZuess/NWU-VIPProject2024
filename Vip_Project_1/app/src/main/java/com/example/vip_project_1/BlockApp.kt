@@ -48,8 +48,7 @@ class BlockApp : Service() {
 
         startForeground(NOTIFICATION_ID, notification)
 
-        // Your app blocking logic here...
-        val am = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        // The app should start running as a frontend service by now but it does not so this will be implemented when google releases their api
         try {
             val usm = getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
             val time = System.currentTimeMillis()

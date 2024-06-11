@@ -5,6 +5,7 @@
 
 package com.example.vip_project_1
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.view.MotionEvent
@@ -27,7 +28,7 @@ class GameWordSearchActivity : AppCompatActivity() {
      * Variable initialization
      */
     private var wordList = listOf("")
-    private var amountofwords = wordList.size
+    private var amountOfWords = wordList.size
 
     private lateinit var wordSearchGrid: GridView
     private lateinit var wordListText: TextView
@@ -42,6 +43,7 @@ class GameWordSearchActivity : AppCompatActivity() {
     // Map to store word positions
     private val wordPositions = mutableMapOf<String, List<Pair<Int, Int>>>()
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_word_search)
@@ -52,14 +54,14 @@ class GameWordSearchActivity : AppCompatActivity() {
         val difficultyLevel = intent.getStringExtra("difficulty_level")
         if (difficultyLevel == "Easy") {
             wordList = listOf("NINE", "TOWN", "CROWN", "STUDIO", "WORD", "SEARCH", "GAME", "LAME")
-            amountofwords = wordList.size
+            amountOfWords = wordList.size
         } else if (difficultyLevel == "Medium") {
             wordList =
                 listOf("DEVELOPER", "KOTLIN", "IPHONE", "APPLE", "DIRT", "SEARCH", "INK", "MOBILE")
-            amountofwords = wordList.size
+            amountOfWords = wordList.size
         } else if (difficultyLevel == "Hard") {
-            wordList = listOf("DEVELOPER", "BEN", "PAN", "LAMMA", "BORD", "SEARCH", "GAME", "LINK")
-            amountofwords = wordList.size
+            wordList = listOf("DEVELOPER", "BEN", "PAN", "LAMA", "BORD", "SEARCH", "GAME", "LINK")
+            amountOfWords = wordList.size
         }
 
         /**
@@ -97,7 +99,7 @@ class GameWordSearchActivity : AppCompatActivity() {
                             selectedWord.append(selectedChar)
                             wordListText.text = selectedWord.toString()
                             val textView = wordSearchGrid.getChildAt(position) as TextView
-                            textView.setBackgroundColor(resources.getColor(R.color.highlightColor))
+                            textView.setBackgroundColor(resources.getColor(R.color.highlightColor, theme))
                             lastSelectedPosition = position
                         }
                     }
@@ -118,7 +120,7 @@ class GameWordSearchActivity : AppCompatActivity() {
         gridData = Array(gridSize) { Array(gridSize) { ' ' } }
 
         for (word in wordList) {
-            placeWord(word.toUpperCase())
+            placeWord(word.uppercase())
         }
 
         for (i in 0 until gridSize) {
@@ -235,8 +237,8 @@ class GameWordSearchActivity : AppCompatActivity() {
             wordList = mutableWordList
 
             displayWordList() // Update the displayed word list
-            amountofwords--
-            gameOver(amountofwords)
+            amountOfWords--
+            gameOver(amountOfWords)
         } else {
             Toast.makeText(this, "Not a valid word: $foundWord", Toast.LENGTH_SHORT).show()
             clearHighlightedCharacters()
@@ -273,8 +275,8 @@ class GameWordSearchActivity : AppCompatActivity() {
     /**
      * Exit the activity and return the result to main page
      */
-    fun exitActivity(view: View) {
-        if(amountofwords>0)
+    fun exitActivity() {
+        if(amountOfWords>0)
         {
             val data = Intent()
             data.putExtra("user_won", false)
@@ -286,8 +288,8 @@ class GameWordSearchActivity : AppCompatActivity() {
     /**
      * Check if the game is over and display a message
      */
-    private fun gameOver(amountofwords: Int) {
-        if (amountofwords <= 0) {
+    private fun gameOver(amountOfWords: Int) {
+        if (amountOfWords <= 0) {
             wordListText.text = "Congratulations YOU WON"
             //Toast.makeText(this, "Congratulations, you won the game!", Toast.LENGTH_SHORT).show()
             val data = Intent()

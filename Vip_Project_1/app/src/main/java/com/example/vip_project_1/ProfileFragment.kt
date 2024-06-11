@@ -139,8 +139,9 @@ class ProfileFragment : Fragment(), PinDailogFragment.PinDialogListener {
             editorData?.putBoolean("ShowData", true)
             editorData?.apply()
 
-            val intent = Intent("com.example.vip_project_1.SHOW_DATA_CHANGED")
-            activity?.sendBroadcast(intent)
+            //This will be implemented on future release when data is involved
+            //val intent = Intent("com.example.vip_project_1.SHOW_DATA_CHANGED")
+            //activity?.sendBroadcast(intent)
         } else {
             Toast.makeText(activity, "Incorrect PIN", Toast.LENGTH_SHORT).show()
             ignoreDataSwitchChange = true
