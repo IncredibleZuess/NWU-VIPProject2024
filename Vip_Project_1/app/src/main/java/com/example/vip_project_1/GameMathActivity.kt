@@ -98,7 +98,7 @@ class GameMathActivity : AppCompatActivity() {
     /**
      * Game over screen
      */
-    private fun GameOver() {
+    private fun gameOver() {
         displayQuestion.text = "Game Over! Correct: $numCorrect, Incorrect: $numIncorrect"
         val total = numCorrect + numIncorrect
         val data = Intent()
@@ -127,7 +127,7 @@ class GameMathActivity : AppCompatActivity() {
             if (questionIndex < numQuestions) {
                 questionDisplay(questionIndex)
             } else {
-                GameOver()
+                gameOver()
             }
         } else {
             Toast.makeText(this, "Please enter a number", Toast.LENGTH_SHORT).show()

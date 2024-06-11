@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="205sp"
             android:fontFamily="@font/paprika"
-            android:text="Hange Man"
+            android:text="Hang Man"
             android:textSize="30sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

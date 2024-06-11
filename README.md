@@ -1,8 +1,15 @@
 ## App User Guide
+![example workflow](https://github.com/IncredibleZuess/NWU-VIPProject2024/actions/workflows/gradle.yml/badge.svg)
+![Static Badge](https://img.shields.io/badge/Project_Leader-Anneme_Janse_Van_Rensburg-blue)
+![Static Badge](https://img.shields.io/badge/Frontend_Developer-Liam_Craven-teal)
+![Static Badge](https://img.shields.io/badge/Frontend_Developer-Stefan_Fourie-teal)
+![Static Badge](https://img.shields.io/badge/Backend_Developer-Carlo_Barnardo-purple)
+![Static Badge](https://img.shields.io/badge/Backend_Developer-Sebastian_Klopper-purple)
+
 
 ### Overview
 
-This app helps parents monitor and manage the usage of selected apps by their children. It includes features for profile management, authentication, and blocking app usage based on set parameters.
+This app helps parents monitor and manage the usage of selected apps by their children. It includes features for profile management, authentication, and blocking app usage based on set parameters(To be Implemented).
 
 ### Table of Contents
 1. [Sign Up Procedure](#sign-up-procedure)
@@ -39,7 +46,7 @@ The profile management feature allows parents to customize settings and manage t
 4. **Dark Mode:**
     - Toggle dark mode using the switch provided in the profile settings.
 
-### App Blocking
+### App Blocking(To be implemented in future release)
 
 The app blocking service helps in restricting app usage based on predefined limits set by parents.
 
@@ -60,7 +67,7 @@ The app blocking service helps in restricting app usage based on predefined limi
 2. **Navigate to the "Games" page.**
 3. **Select the game category of your choice.**
 4. **Choose your desired difficulty level.**
-5. **Earn time by successfully completing the game.**
+5. **Deduct time by successfully completing the game.**
 
 ### Settings
 

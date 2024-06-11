@@ -77,6 +77,7 @@ class GameDifficultyActivity : AppCompatActivity() {
         }
     }
 
+    @Deprecated("This function will be updated in future")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == GAME_RESULT_REQUEST_CODE) {
